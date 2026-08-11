@@ -1,0 +1,502 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <meta name="theme-color" content="#1e3a8a">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <title>Prevención Fenómeno El Niño | Sullana</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css">
+  <link rel="stylesheet" href="../css/styles.css">
+  <link rel="icon" href="../assets/images/logo.svg" type="image/svg+xml">
+</head>
+<body>
+
+  <!-- ========== HEADER ========== -->
+  <header class="header" id="inicio">
+    <div class="container header__inner">
+      <a href="#inicio" class="logo">
+        <img src="../assets/images/logo.svg" alt="Logo Prevención El Niño" class="logo__img">
+        <span class="logo__text">Prevención Fenómeno El Niño</span>
+      </a>
+
+      <button class="nav-toggle" id="navToggle" aria-label="Abrir menú">
+        <i class="fa-solid fa-bars"></i>
+      </button>
+
+      <div class="nav-overlay" id="navOverlay" aria-hidden="true"></div>
+
+      <nav class="nav" id="mainNav" aria-label="Navegación principal">
+        <a href="#inicio" class="nav__link nav__link--active">Inicio</a>
+        <a href="#alertas" class="nav__link">Alertas</a>
+        <a href="#mapa-riesgos" class="nav__link">Mapa de Riesgos</a>
+        <a href="#reporta-inundacion" class="nav__link">Reporta</a>
+        <a href="#recursos" class="nav__link">Recursos</a>
+        <a href="#contacto" class="nav__link">Contacto</a>
+        <a href="#reporta-inundacion" class="btn btn--primary nav__cta-mobile">
+          <i class="fa-solid fa-triangle-exclamation"></i>
+          Reportar emergencia
+        </a>
+      </nav>
+
+      <a href="#reporta-inundacion" class="btn btn--primary btn--sm header__cta">
+        <i class="fa-solid fa-triangle-exclamation"></i>
+        Reportar emergencia
+      </a>
+    </div>
+  </header>
+
+  <!-- ========== HERO ========== -->
+  <section class="hero">
+    <div class="hero__overlay"></div>
+    <div class="container hero__grid">
+      <div class="hero__content">
+        <h1 class="hero__title">Juntos prevenimos, juntos estamos seguros</h1>
+        <p class="hero__subtitle">
+          Plataforma digital para la prevención y respuesta ante el Fenómeno El Niño en el distrito de Sullana.
+          Recibe alertas, consulta zonas de riesgo y reporta inundaciones en tu comunidad.
+        </p>
+        <div class="hero__actions">
+          <a href="#alertas" class="btn btn--primary">
+            <i class="fa-solid fa-bell"></i> Ver alertas
+          </a>
+          <a href="#recursos" class="btn btn--outline">
+            <i class="fa-solid fa-circle-info"></i> Conocer más
+          </a>
+        </div>
+      </div>
+
+      <div class="hero__cards">
+        <article class="risk-card">
+          <div class="risk-card__header">
+            <span>Nivel de Riesgo Actual</span>
+            <i class="fa-solid fa-cloud-rain"></i>
+          </div>
+          <p class="risk-card__level risk-card__level--moderate" id="currentRiskLevel">Riesgo Moderado</p>
+          <a href="#mapa-riesgos" class="risk-card__link">Ver detalles <i class="fa-solid fa-arrow-right"></i></a>
+        </article>
+
+        <article class="alert-card">
+          <div class="alert-card__header">
+            <span>Última alerta</span>
+          </div>
+          <div class="alert-card__body">
+            <i class="fa-solid fa-triangle-exclamation alert-card__icon"></i>
+            <div>
+              <p class="alert-card__text">
+                Se prevén lluvias intensas en la región Piura y el distrito de Sullana durante las próximas 48 horas.
+              </p>
+              <time class="alert-card__date" datetime="2024-05-20">20 de mayo, 08:30 a.m.</time>
+            </div>
+          </div>
+          <a href="#alertas" class="alert-card__link">Ver todas las alertas <i class="fa-solid fa-arrow-right"></i></a>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========== QUICK LINKS ========== -->
+  <section class="quick-links">
+    <div class="container">
+      <div class="quick-links__grid">
+        <a href="#alertas" class="quick-link">
+          <span class="quick-link__icon"><i class="fa-solid fa-bell"></i></span>
+          <span class="quick-link__label">Alertas tempranas</span>
+        </a>
+        <a href="#mapa-riesgos" class="quick-link">
+          <span class="quick-link__icon"><i class="fa-solid fa-map-location-dot"></i></span>
+          <span class="quick-link__label">Mapa de riesgos</span>
+        </a>
+        <a href="#recursos" class="quick-link">
+          <span class="quick-link__icon"><i class="fa-solid fa-clipboard-list"></i></span>
+          <span class="quick-link__label">Recomendaciones</span>
+        </a>
+        <a href="#reporta-inundacion" class="quick-link">
+          <span class="quick-link__icon"><i class="fa-solid fa-bullhorn"></i></span>
+          <span class="quick-link__label">Reporta una emergencia</span>
+        </a>
+        <a href="#numeros" class="quick-link">
+          <span class="quick-link__icon"><i class="fa-solid fa-phone"></i></span>
+          <span class="quick-link__label">Números de emergencia</span>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========== MAIN GRID ========== -->
+  <main class="main-content">
+    <div class="container main-grid">
+
+      <!-- Mapa de riesgos -->
+      <section class="card card--map" id="mapa-riesgos">
+        <div class="card__header">
+          <h2 class="card__title">Mapa de zonas de riesgo</h2>
+          <a href="#reporta-inundacion" class="card__link">Ver mapa completo <i class="fa-solid fa-arrow-right"></i></a>
+        </div>
+        <div class="risk-map">
+          <div class="risk-map__legend">
+            <h3>Leyenda</h3>
+            <ul>
+              <li><span class="dot dot--red"></span> Muy alto</li>
+              <li><span class="dot dot--orange"></span> Alto</li>
+              <li><span class="dot dot--yellow"></span> Moderado</li>
+              <li><span class="dot dot--green"></span> Bajo</li>
+            </ul>
+          </div>
+          <div class="risk-map__canvas" id="riskMapCanvas">
+            <svg viewBox="0 0 400 280" class="risk-map__svg" aria-label="Mapa estilizado de Sullana">
+              <rect width="400" height="280" fill="#dbeafe"/>
+              <path d="M0 180 Q100 160 200 170 T400 150 L400 280 L0 280 Z" fill="#93c5fd" opacity="0.6"/>
+              <path d="M80 0 L120 280" stroke="#bfdbfe" stroke-width="8"/>
+              <path d="M200 0 L210 280" stroke="#bfdbfe" stroke-width="6"/>
+              <path d="M300 0 L290 280" stroke="#bfdbfe" stroke-width="6"/>
+              <path d="M0 100 L400 110" stroke="#bfdbfe" stroke-width="5"/>
+              <path d="M0 200 L400 190" stroke="#bfdbfe" stroke-width="5"/>
+              <circle cx="120" cy="130" r="10" fill="#ef4444" class="map-pin" data-zone="Bellavista" data-level="Muy alto"/>
+              <circle cx="200" cy="160" r="10" fill="#f97316" class="map-pin" data-zone="Centro" data-level="Alto"/>
+              <circle cx="280" cy="120" r="10" fill="#eab308" class="map-pin" data-zone="Querecotillo" data-level="Moderado"/>
+              <circle cx="160" cy="210" r="10" fill="#22c55e" class="map-pin" data-zone="Salitral" data-level="Bajo"/>
+              <circle cx="320" cy="200" r="10" fill="#f97316" class="map-pin" data-zone="La Bocana" data-level="Alto"/>
+              <text x="200" y="30" text-anchor="middle" fill="#1e3a8a" font-size="14" font-weight="600">Distrito de Sullana</text>
+            </svg>
+            <div class="risk-map__tooltip" id="mapTooltip"></div>
+          </div>
+        </div>
+        <p class="risk-map__hint">
+          <i class="fa-solid fa-circle-info"></i>
+          Selecciona un punto en el mapa para ver más información sobre el nivel de riesgo en esa zona.
+        </p>
+      </section>
+
+      <!-- Recomendaciones -->
+      <section class="card card--recommendations" id="recursos">
+        <div class="card__header">
+          <h2 class="card__title">Recomendaciones destacadas</h2>
+          <a href="#recursos" class="card__link">Ver todas <i class="fa-solid fa-arrow-right"></i></a>
+        </div>
+        <ul class="recommendations">
+          <li class="recommendation">
+            <span class="recommendation__icon"><i class="fa-solid fa-suitcase-medical"></i></span>
+            <div class="recommendation__content">
+              <h3>Prepara tu mochila de emergencia</h3>
+              <p>Incluye agua, alimentos no perecederos, linterna, radio y documentos importantes.</p>
+            </div>
+            <i class="fa-solid fa-chevron-right recommendation__arrow"></i>
+          </li>
+          <li class="recommendation">
+            <span class="recommendation__icon"><i class="fa-solid fa-house-chimney"></i></span>
+            <div class="recommendation__content">
+              <h3>Refuerza tu vivienda</h3>
+              <p>Revisa techos, desagües y canales para evitar filtraciones e inundaciones.</p>
+            </div>
+            <i class="fa-solid fa-chevron-right recommendation__arrow"></i>
+          </li>
+          <li class="recommendation">
+            <span class="recommendation__icon"><i class="fa-solid fa-person-running"></i></span>
+            <div class="recommendation__content">
+              <h3>Identifica rutas de evacuación</h3>
+              <p>Conoce los puntos seguros y las vías altas en caso de crecida de ríos.</p>
+            </div>
+            <i class="fa-solid fa-chevron-right recommendation__arrow"></i>
+          </li>
+          <li class="recommendation">
+            <span class="recommendation__icon"><i class="fa-solid fa-radio"></i></span>
+            <div class="recommendation__content">
+              <h3>Mantente informado</h3>
+              <p>Sigue las alertas oficiales de SENAMHI e INDECI y comparte información verificada.</p>
+            </div>
+            <i class="fa-solid fa-chevron-right recommendation__arrow"></i>
+          </li>
+        </ul>
+      </section>
+
+      <!-- Números de emergencia -->
+      <section class="card card--emergency" id="numeros">
+        <div class="card__header">
+          <h2 class="card__title">Números de emergencia</h2>
+        </div>
+        <ul class="emergency-list">
+          <li class="emergency-item">
+            <span class="emergency-item__icon emergency-item__icon--indec"><i class="fa-solid fa-shield-halved"></i></span>
+            <div>
+              <strong>INDECI</strong>
+              <a href="tel:119">119</a>
+            </div>
+          </li>
+          <li class="emergency-item">
+            <span class="emergency-item__icon emergency-item__icon--senamhi"><i class="fa-solid fa-cloud-sun-rain"></i></span>
+            <div>
+              <strong>SENAMHI</strong>
+              <a href="tel:080011019">0800-11-019</a>
+            </div>
+          </li>
+          <li class="emergency-item">
+            <span class="emergency-item__icon emergency-item__icon--bomberos"><i class="fa-solid fa-fire-extinguisher"></i></span>
+            <div>
+              <strong>Bomberos</strong>
+              <a href="tel:116">116</a>
+            </div>
+          </li>
+          <li class="emergency-item">
+            <span class="emergency-item__icon emergency-item__icon--policia"><i class="fa-solid fa-building-shield"></i></span>
+            <div>
+              <strong>Policía Nacional</strong>
+              <a href="tel:105">105</a>
+            </div>
+          </li>
+          <li class="emergency-item">
+            <span class="emergency-item__icon emergency-item__icon--defensa"><i class="fa-solid fa-helmet-safety"></i></span>
+            <div>
+              <strong>Defensa Civil Sullana</strong>
+              <a href="tel:073123456">(073) 123-456</a>
+            </div>
+          </li>
+        </ul>
+        <a href="#contacto" class="card__link card__link--bottom">Ver más contactos <i class="fa-solid fa-arrow-right"></i></a>
+      </section>
+    </div>
+  </main>
+
+  <!-- ========== ALERTAS ========== -->
+  <section class="alerts-section" id="alertas">
+    <div class="container">
+      <div class="section-header">
+        <h2 class="section-title">Alertas activas</h2>
+        <p class="section-subtitle">Información actualizada sobre condiciones meteorológicas y riesgos en Sullana.</p>
+      </div>
+      <div class="alerts-grid" id="alertsGrid">
+        <article class="alert-item alert-item--warning">
+          <div class="alert-item__badge"><i class="fa-solid fa-cloud-showers-heavy"></i> Lluvia intensa</div>
+          <h3>Precipitaciones moderadas a fuertes</h3>
+          <p>Se esperan acumulados de hasta 40 mm en las próximas 24 horas en zonas bajas del distrito.</p>
+          <time>Actualizado: hoy, 07:00 a.m.</time>
+        </article>
+        <article class="alert-item alert-item--danger">
+          <div class="alert-item__badge"><i class="fa-solid fa-water"></i> Riesgo de inundación</div>
+          <h3>Crecida del río Chira</h3>
+          <p>Nivel del río en ascenso. Poblaciones ribereñas deben mantenerse alerta y preparar evacuación.</p>
+          <time>Actualizado: hoy, 06:30 a.m.</time>
+        </article>
+        <article class="alert-item alert-item--info">
+          <div class="alert-item__badge"><i class="fa-solid fa-temperature-high"></i> Temperatura</div>
+          <h3>Incremento de temperatura costera</h3>
+          <p>Condiciones típicas del Fenómeno El Niño. Hidratación y protección solar recomendadas.</p>
+          <time>Actualizado: ayer, 05:00 p.m.</time>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========== REPORTE DE INUNDACIONES SULLANA ========== -->
+  <section class="flood-section" id="reporta-inundacion">
+    <div class="container">
+      <div class="section-header section-header--light">
+        <span class="section-badge"><i class="fa-solid fa-water"></i> Distrito de Sullana</span>
+        <h2 class="section-title">Alerta de Inundaciones</h2>
+        <p class="section-subtitle">
+          ¿Hay una inundación en tu zona? Reporta el incidente para alertar a las autoridades y a tu comunidad.
+        </p>
+      </div>
+
+      <div class="flood-grid">
+        <!-- Formulario -->
+        <div class="card flood-form-card">
+          <h3 class="flood-form__title"><i class="fa-solid fa-pen-to-square"></i> Reportar inundación</h3>
+          <form id="floodReportForm" class="flood-form" novalidate>
+            <div class="form-group">
+              <label for="reporterName">Nombre completo <span class="required">*</span></label>
+              <input type="text" id="reporterName" name="reporterName" placeholder="Ej: Juan Pérez García" required>
+            </div>
+
+            <div class="form-group">
+              <label for="reporterPhone">Teléfono de contacto</label>
+              <input type="tel" id="reporterPhone" name="reporterPhone" placeholder="Ej: 987 654 321">
+            </div>
+
+            <div class="form-group">
+              <label for="floodZone">Zona / Sector en Sullana <span class="required">*</span></label>
+              <select id="floodZone" name="floodZone" required>
+                <option value="">Selecciona una zona</option>
+                <option value="centro">Centro de Sullana</option>
+                <option value="bellavista">Bellavista</option>
+                <option value="querecotillo">Querecotillo</option>
+                <option value="salitral">Salitral</option>
+                <option value="la-bocana">La Bocana</option>
+                <option value="el-chilalo">El Chilalo</option>
+                <option value="san-jacinto">San Jacinto</option>
+                <option value="marcavelica">Marcavelica</option>
+                <option value="otro">Otra zona</option>
+              </select>
+            </div>
+
+            <div class="form-group">
+              <label for="floodAddress">Ubicación precisa <span class="required">*</span></label>
+              <input type="text" id="floodAddress" name="floodAddress" placeholder="Ej: Av. Grau cuadra 5, cerca al colegio..." required>
+            </div>
+
+            <div class="form-group">
+              <label for="floodSeverity">Nivel de inundación <span class="required">*</span></label>
+              <select id="floodSeverity" name="floodSeverity" required>
+                <option value="">Selecciona el nivel</option>
+                <option value="bajo">Bajo — Encharcamiento leve</option>
+                <option value="moderado">Moderado — Agua en calles y viviendas bajas</option>
+                <option value="alto">Alto — Viviendas inundadas, difícil tránsito</option>
+                <option value="critico">Crítico — Personas atrapadas o en peligro</option>
+              </select>
+            </div>
+
+            <div class="form-group">
+              <label for="floodDescription">Descripción del incidente <span class="required">*</span></label>
+              <textarea id="floodDescription" name="floodDescription" rows="4" placeholder="Describe lo que está ocurriendo, cuántas familias están afectadas, si hay heridos, etc." required></textarea>
+            </div>
+
+            <div class="form-group">
+              <label for="floodPhoto">Foto del incidente (opcional)</label>
+              <div class="file-upload">
+                <input type="file" id="floodPhoto" name="floodPhoto" accept="image/*">
+                <label for="floodPhoto" class="file-upload__label">
+                  <i class="fa-solid fa-camera"></i>
+                  <span id="fileLabel">Seleccionar imagen</span>
+                </label>
+              </div>
+              <div id="photoPreview" class="photo-preview"></div>
+            </div>
+
+            <div class="form-group form-group--checkbox">
+              <input type="checkbox" id="needsHelp" name="needsHelp">
+              <label for="needsHelp">Necesito ayuda urgente / evacuación</label>
+            </div>
+
+            <button type="submit" class="btn btn--primary btn--block">
+              <i class="fa-solid fa-paper-plane"></i> Enviar reporte
+            </button>
+          </form>
+          <div id="formMessage" class="form-message" role="alert"></div>
+        </div>
+
+        <!-- Mapa interactivo + reportes -->
+        <div class="flood-map-panel">
+          <div class="card flood-map-card">
+            <div class="card__header">
+              <h3 class="card__title">Mapa de reportes — Sullana</h3>
+              <span class="report-count" id="reportCount">0 reportes</span>
+            </div>
+            <div id="floodMap" class="flood-map"></div>
+            <p class="flood-map__hint">
+              <i class="fa-solid fa-location-dot"></i>
+              Los reportes enviados aparecen en el mapa en tiempo real.
+            </p>
+          </div>
+
+          <div class="card flood-reports-card">
+            <h3 class="card__title"><i class="fa-solid fa-list"></i> Reportes recientes</h3>
+            <ul class="flood-reports-list" id="floodReportsList">
+              <li class="flood-reports-empty">No hay reportes aún. Sé el primero en reportar una inundación.</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========== NEWSLETTER ========== -->
+  <section class="newsletter" id="contacto">
+    <div class="container newsletter__inner">
+      <div class="newsletter__illustration">
+        <img src="../assets/images/newsletter-illustration.svg" alt="Ilustración de prevención">
+      </div>
+      <div class="newsletter__content">
+        <p class="newsletter__quote">
+          "El Fenómeno El Niño puede afectar a todos, pero la prevención nos hace más fuertes."
+        </p>
+      </div>
+      <form class="newsletter__form" id="newsletterForm">
+        <div class="newsletter__input-group">
+          <input type="email" id="newsletterEmail" placeholder="Ingresa tu correo electrónico" required>
+          <button type="submit" class="btn btn--primary">Suscribirme</button>
+        </div>
+        <p class="newsletter__note" id="newsletterMessage"></p>
+      </form>
+      <div class="newsletter__bell">
+        <i class="fa-solid fa-bell"></i>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========== FOOTER ========== -->
+  <footer class="footer">
+    <div class="container footer__grid">
+      <div class="footer__brand">
+        <a href="#inicio" class="logo logo--footer">
+          <img src="../assets/images/logo.svg" alt="Logo" class="logo__img">
+          <span class="logo__text">Prevención Fenómeno El Niño</span>
+        </a>
+        <p>Plataforma comunitaria para la prevención, alerta temprana y respuesta ante emergencias por El Niño en Sullana.</p>
+      </div>
+
+      <div class="footer__col">
+        <h4>Enlaces rápidos</h4>
+        <ul>
+          <li><a href="#inicio">Inicio</a></li>
+          <li><a href="#alertas">Alertas</a></li>
+          <li><a href="#mapa-riesgos">Mapa de Riesgos</a></li>
+          <li><a href="#reporta-inundacion">Reporta</a></li>
+          <li><a href="#contacto">Contacto</a></li>
+        </ul>
+      </div>
+
+      <div class="footer__col">
+        <h4>Recursos</h4>
+        <ul>
+          <li><a href="#recursos">Guías de prevención</a></li>
+          <li><a href="#recursos">Kit de emergencia</a></li>
+          <li><a href="#recursos">Videos educativos</a></li>
+          <li><a href="#recursos">Preguntas frecuentes</a></li>
+        </ul>
+      </div>
+
+      <div class="footer__col">
+        <h4>Síguenos</h4>
+        <div class="footer__social">
+          <a href="#" aria-label="Facebook"><i class="fa-brands fa-facebook-f"></i></a>
+          <a href="#" aria-label="Instagram"><i class="fa-brands fa-instagram"></i></a>
+          <a href="#" aria-label="YouTube"><i class="fa-brands fa-youtube"></i></a>
+          <a href="#" aria-label="WhatsApp"><i class="fa-brands fa-whatsapp"></i></a>
+        </div>
+      </div>
+    </div>
+
+    <div class="footer__bottom">
+      <div class="container footer__bottom-inner">
+        <p>Desarrollado con <i class="fa-solid fa-heart"></i> para nuestra comunidad</p>
+        <p>&copy; 2024 Prevención Fenómeno El Niño. Todos los derechos reservados.</p>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Modal de éxito -->
+  <div class="modal" id="successModal" aria-hidden="true">
+    <div class="modal__overlay" id="modalOverlay"></div>
+    <div class="modal__content">
+      <button class="modal__close" id="modalClose" aria-label="Cerrar">&times;</button>
+      <div class="modal__icon"><i class="fa-solid fa-circle-check"></i></div>
+      <h3>¡Reporte enviado!</h3>
+      <p>Tu reporte de inundación ha sido registrado. Las autoridades y la comunidad han sido notificados.</p>
+      <button class="btn btn--primary" id="modalOk">Entendido</button>
+    </div>
+  </div>
+
+  <!-- Botón flotante de emergencia (móvil) -->
+  <a href="#reporta-inundacion" class="fab-emergency" id="fabEmergency" aria-label="Reportar emergencia">
+    <i class="fa-solid fa-triangle-exclamation"></i>
+    <span>Emergencia</span>
+  </a>
+
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+  <script src="../js/main.js"></script>
+</body>
+</html>
